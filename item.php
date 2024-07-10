@@ -1,3 +1,34 @@
+<?php
+if (isset($_GET['i'])) {
+    if ($_GET['i'] == null) {
+        header("Location: index.php");
+    }
+}else{
+    header("Location: index.php");
+}
+$a = 0;
+
+if ($a == 1) {
+    $modalHide  = 'overflow-hidden';
+    $modalClass = 'flex';
+} else {
+    $modalHide  = '';
+    $modalClass = 'hidden';
+}
+
+if (isset($_POST['sum'])) {
+    $name         = $_POST['name'];
+    $size_id      = $_POST['size_id'];
+    $type_id      = $_POST['type_id'];
+    $quantity     = $_POST['quantity'];
+    $product_id   = $_POST['product_id'];
+    
+    $extend_price = ($type_price + $size_price) * $quantity;
+    $base_price   = $item_price * $quantity;
+    $total_price  = $base_price + $extend_price;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
@@ -9,10 +40,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <link href="assets/css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
-<body class="bg-neutral-100">
+<body class="bg-neutral-100 <?php echo $modalHide; ?>">
     <nav class="bg-blue-950 fixed top-0 z-40 start-0 w-full">
         <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-2">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -20,7 +52,7 @@
                 <!-- <h3 class="text-neutral-50 text-lg font-extrabold">< MAX PRINT /></h3> -->
                 <span class="self-center text-2xl font-semibold whitespace-nowrap text-bluzi-50"></span>
             </a>
-            <button data-collapse-toggle="navbar-multi-level" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 hover:text-bluzi-50 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-multi-level" aria-expanded="false">
+            <button data-collapse-toggle="navbar-multi-level" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-neutral-500 hover:text-bluzi-50 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-neutral-200" aria-controls="navbar-multi-level" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
@@ -53,86 +85,129 @@
         <div class="flex flex-wrap justify-center px-2 lg:px-16 xl:px-16 gap-8 mt-8">
 
 
-            <div class="min-w-screen max-w-full xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-6xl xl:max-w-6xl bg-white border border-gray-200 rounded-lg shadow">
+            <div class="min-w-screen max-w-full xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-6xl xl:max-w-6xl bg-white border border-neutral-200 rounded-lg shadow">
                 <a href="#">
                     <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=FOO&font=lobster" alt="" />
                 </a>
                 <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Noteworthy technology acquisitions 2021</h5>
-                    </a>
+                    <h5 class="text-2xl font-bold tracking-tight text-neutral-900">Foo Item</h5>
+                    <!-- <p class="font-semibold text-lg text-blue-800">Rp. <span class="rp">50000</span></p> -->
+                    <?php
+                    setlocale(LC_MONETARY, "ID");
+                    $rp = number_format(500000);
+                    ?>
+                    <p class="font-semibold text-lg text-blue-800">Rp. <span class=""><?php echo $rp; ?></span></p>
                 </div>
             </div>
 
 
-            <div class="w-screen max-w-full xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-full xl:max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
-                <form class="space-y-4" action="#">
-                    <h5 class="text-xl font-medium text-gray-900">Order</h5>
+            <div class="w-screen max-w-full xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-full xl:max-w-md p-4 bg-white border border-neutral-200 rounded-lg shadow sm:p-6 md:p-8">
+                <form class="space-y-4" action="item.php">
+                    <h5 class="text-xl font-bold text-neutral-900">Form Order</h5>
                     <hr class="border-1 border-blue-950">
                     <div>
-                        <label for="nama" class="block mb-2 text-sm font-medium text-gray-900">Nama Anda</label>
-                        <input type="text" name="nama" id="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@company.com" required />
+                        <label for="nama" class="block mb-2 text-sm font-medium text-neutral-900">Nama Anda</label>
+                        <input type="text" name="nama" id="nama" class="bg-neutral-50 font-semibold border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@company.com" required />
                     </div>
                     <div>
-                        <label for="ukuran" class="block mb-2 text-sm font-medium text-gray-900">Ukuran</label>
-                        <select type="text" name="ukuran" id="ukuran" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@company.com" required />
-                        <option class="bg-gray-50 border border-gray-300 text-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" selected disabled>
+                        <label for="ukuran" class="block mb-2 text-sm font-medium text-neutral-900">Ukuran</label>
+                        <select type="text" name="ukuran" id="ukuran" class="bg-neutral-50 font-semibold border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@company.com" required />
+                        <option value="50000" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-md font-semibold rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" selected disabled>
                             -- Pilih Ukuran
                         </option>
-                        <option class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            -- Pilih Ukuran
-                        </option>
-                        <option class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            -- Pilih Ukuran
+                        <option value="50000" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-md font-semibold rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            50x10cm
                         </option>
                         </select>
                     </div>
                     <div>
-                        <label for="ukuran" class="block mb-2 text-sm font-medium text-gray-900">Jenis</label>
-                        <select type="text" name="ukuran" id="ukuran" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@company.com" required />
-                        <option class="bg-gray-50 border border-gray-300 text-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" selected disabled>
-                            -- Pilih Jenis
+                        <label for="jenis" class="block mb-2 text-sm font-medium text-neutral-900">Jenis</label>
+                        <select type="text" name="jenis" id="jenis" class="bg-neutral-50 font-semibold border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@company.com" required />
+                        <option value="50000" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-md font-semibold rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" selected disabled>
+                            -- Pilih Ukuran
+                        </option>
+                        <option value="50000" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-md font-semibold rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            Glosy
                         </option>
                         </select>
                     </div>
                     <div>
-                        <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900">Jumlah Pesanan</label>
+                        <label for="jumlah" class="block mb-2 text-sm font-medium text-neutral-900">Jumlah Pesanan</label>
                         <div class="flex">
-                            <input type="number" name="jumlah" id="jumlah" class="rounded-none rounded-s-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 " placeholder="Jumlah Item">
-                            <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-s-0 border-gray-300 rounded-e-md">
-                                pcs
+                            <input type="number" value="1" min="1" name="jumlah" id="jumlah" class="rounded-none rounded-s-lg bg-neutral-50 font-semibold border border-neutral-300 text-neutral-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 " placeholder="Jumlah Item">
+                            <span class="inline-flex items-center px-3 text-sm font-bold text-neutral-900 bg-neutral-200 border border-s-0 border-neutral-300 rounded-e-md uppercase">
+                                PCS
                             </span>
                         </div>
                     </div>
-                    <hr class="border-1 border-blue-950">
-                    <div class="space-y-0 py-2 text-left">
-                        <p class="text-xl">
-                            <span class="text-lg font-medium text-gray-900">Total Harga</span>
-                            Rp.
-                            <span class="rp">50000</span>
+                    <hr class="border-1 border-neutral-300">
+                    <div class="space-y-0 py-1 text-left">
+                        <p class="text-sm font-medium text-neutral-600 py-2">
+                            <i class="fa fa-angle-right fa-xs fa-fw pr-4 text-blue-700 text-xs"></i>
+                            Isi Form dan Klik Hitung/Order untuk Melihat Detail Harga dan Memesan Item Langsung via WhatsApp
+                        </p>
+                        <p class="text-sm font-medium text-neutral-600 py-2">
+                            <i class="fa fa-angle-right fa-xs fa-fw pr-4 text-blue-700 text-xs"></i>Ukuran dan Tipe Item Menentukan Harga
                         </p>
                     </div>
-                    <hr class="border-1 border-blue-950">
-                    <a href="#" class="inline-flex w-full justify-center items-center px-3 py-2 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                        Read more
+                    <hr class="border-1 border-neutral-300">
+
+                    <button type="submit" name="sum" class="inline-flex w-full justify-center items-center px-3 py-2 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                        Hitung/Order
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                         </svg>
-                    </a>
-                    <a href="#" class="inline-flex w-full justify-center items-center px-3 py-2 text-md font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 gap-2">
-                        Pesan via Whatsapp
-                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd" />
-                            <path fill="currentColor" d="M16.735 13.492c-.038-.018-1.497-.736-1.756-.83a1.008 1.008 0 0 0-.34-.075c-.196 0-.362.098-.49.291-.146.217-.587.732-.723.886-.018.02-.042.045-.057.045-.013 0-.239-.093-.307-.123-1.564-.68-2.751-2.313-2.914-2.589-.023-.04-.024-.057-.024-.057.005-.021.058-.074.085-.101.08-.079.166-.182.249-.283l.117-.14c.121-.14.175-.25.237-.375l.033-.066a.68.68 0 0 0-.02-.64c-.034-.069-.65-1.555-.715-1.711-.158-.377-.366-.552-.655-.552-.027 0 0 0-.112.005-.137.005-.883.104-1.213.311-.35.22-.94.924-.94 2.16 0 1.112.705 2.162 1.008 2.561l.041.06c1.161 1.695 2.608 2.951 4.074 3.537 1.412.564 2.081.63 2.461.63.16 0 .288-.013.4-.024l.072-.007c.488-.043 1.56-.599 1.804-1.276.192-.534.243-1.117.115-1.329-.088-.144-.239-.216-.43-.308Z" />
-                        </svg>
+                    </button>
 
-                    </a>
                 </form>
             </div>
-
-
         </div>
     </section>
+
+    <button data-modal-target="order-modal" data-modal-toggle="order-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hidden" type="button">
+    </button>
+
+    <!-- Main modal -->
+    <div id="order-modal" data-modal-backdrop="static" tabindex="-1" aria-modal="true" role="dialog" class="bg-center w-screen h-screen bg-no-repeat bg-[url('assets/img/system/backdrop-blur.png')] h-screen overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center backdrop-blur-sm md:inset-0 h-[calc(100%-1rem)] <?php echo $modalClass; ?>">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-2 px-4 border-b rounded-t">
+                    <h3 class="text-xl font-bold text-neutral-900">
+                        Order Detail
+                    </h3>
+                    <button type="button" class="end-2.5 text-neutral-400 bg-transparent hover:bg-neutral-200 hover:text-neutral-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="order-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-4 md:p-5">
+                    <form class="space-y-4" action="#">
+                        <div>
+                            <p class="block text-sm font-medium text-neutral-900">Nama Pemesan</p>
+                            <p class="w-full text-neutral-900 text-lg font-semibold">Raihan Akbar</p>
+                        </div>
+                        <div>
+                            <p class="block text-sm font-medium text-neutral-900">Nama Pemesan</p>
+                            <p class="w-full text-neutral-900 text-lg font-semibold">Raihan Akbar</p>
+                        </div>
+                        <div>
+                            <p class="block text-sm font-medium text-neutral-900">Nama Pemesan</p>
+                            <p class="w-full text-neutral-900 text-lg font-semibold">Raihan Akbar</p>
+                        </div>
+                        <hr>
+                        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Login to your account</button>
+                        <button class="w-full text-sm text-center font-medium text-neutral-400 hover:text-neutral-950">Tutup</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>

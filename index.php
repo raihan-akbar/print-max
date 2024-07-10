@@ -18,9 +18,9 @@
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="assets/img/system/sq-logo.png" class="h-7" alt="Fox-Labs Logo" />
                 <!-- <h3 class="text-neutral-50 text-lg font-extrabold">< MAX PRINT /></h3> -->
-                <span class="self-center text-2xl font-semibold whitespace-nowrap text-bluzi-50"></span>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-blue-50"></span>
             </a>
-            <button data-collapse-toggle="navbar-multi-level" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 hover:text-bluzi-50 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-multi-level" aria-expanded="false">
+            <button data-collapse-toggle="navbar-multi-level" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 hover:text-blue-50 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-multi-level" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
@@ -78,384 +78,37 @@
         </div>
         <div class="flex flex-wrap justify-center gap-6 px-4">
 
-            <!-- Loop The Card -->
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
+            <?php
+            include_once 'conn.php';
+            $query = mysqli_query($con, "SELECT * FROM product");
+            while ($products = mysqli_fetch_array($query)) {
+            ?>
+                <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">ad cupiditate dolor</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">50000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
+                        <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
                     </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
+                    <div class="p-5">
+                        <a href="#">
+                            <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize"><?= $products['product_name']; ?></h5>
+                            <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
+                            <p class="text-sm mt-4">Harga Mulai Dari</p>
+                            <p class="text-xl font-medium text-neutral-800">
+                                <span class="rp"><?= $products['product_price']; ?></span>
+                                <span class="text-neutral-600 font-regular text-sm">IDR</span>
+                            </p>
                         </a>
+                        <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
+                        <div class="mt-4 flex w-full text-center">
+                            <a href="item.php?i=<?= $products['product_id']; ?>" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
+                                Rincian Produk
+                                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">aut optio accusamus</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">60000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">molestiae numquam quo</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">40000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">voluptates iusto dolor</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">10000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">explicabo eligendi cumque</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">30000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">et et minima</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">70000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">rem ex occaecati</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">40000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">vel nemo aperiam</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">10000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">ullam architecto et</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">20000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">qui ratione provident</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">40000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">facere tempore laudantium</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">90000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">repudiandae vitae consequatur</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">70000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">aut cumque quibusdam</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">70000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">quod eum quia</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">80000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
-                <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">veritatis hic voluptates</h5>
-                        <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
-                        <p class="text-sm mt-4">Harga Mulai Dari</p>
-                        <p class="text-xl font-medium text-neutral-800">
-                            <span class="rp">50000</span>
-                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
-                        </p>
-                    </a>
-                    <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
-                    <div class="mt-4 flex w-full text-center">
-                        <a href="item.php?" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
-                            Rincian Produk
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
+            <?php } ?>
 
             <!-- End of Card Looping -->
 

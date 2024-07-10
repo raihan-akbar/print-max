@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (isset($_SESSION['auth'])) {
+    header("Location: dashboard.php");
+}
+
 include_once 'conn.php';
 
 if (isset($_POST['signin'])) {
@@ -8,16 +14,22 @@ if (isset($_POST['signin'])) {
 
         $email  = $_POST['email'];
         $password = $_POST['password'];
-        $user_check = "SELECT * FROM user WHERE email='$email' ";
+        $user_check = "SELECT * FROM user,role WHERE user.email='$email' AND role.role_id=user.role_id ";
         $result = mysqli_query($con, $user_check);
         $row = mysqli_num_rows($result);
-
+        
         if ($row == 1) {
             $data = mysqli_fetch_assoc($result);
             if (password_verify($password, $data['password'])) {
                 header("Location: dashboard.php");
                 // SESSION
-                // START HERE
+                $_SESSION['auth']      = true;
+                $_SESSION['id']        = $data['user_id'];
+                $_SESSION['username']  = $data['username'];
+                $_SESSION['email']     = $data['email'];
+                $_SESSION['name']      = $data['name'];
+                $_SESSION['role_id']   = $data['role_id'];
+                $_SESSION['role_name'] = $data['role_name'];
 
             } else {
                 header("Location: signin.php?error=2");
@@ -52,7 +64,7 @@ if (isset($_POST['signin'])) {
                                 <img src="assets/img/system/sq-logo.png" alt="">
                             </div>
                             <div>
-                                <p class="text-red-700">
+                                <p class="text-red-700 font-medium p-2">
                                     <?php
                                     if (isset($_GET['error'])) {
                                         if ($_GET['error'] == 0) {
@@ -61,6 +73,8 @@ if (isset($_POST['signin'])) {
                                             echo 'Akun Tidak Ditemukan!';
                                         } else if ($_GET['error'] == 2) {
                                             echo 'Password Salah!';
+                                        }else if ($_GET['error'] == 3) {
+                                            echo 'Mohon Login!';
                                         }
                                     }
                                     else {
@@ -89,7 +103,7 @@ if (isset($_POST['signin'])) {
         </div>
 
         <div class="w-full text-center mt-14">
-            <a href="/" class="text-white text-sm">
+            <a href="/print-max" class="text-white text-sm">
                 <p>Kembali ke Beranda</p>
             </a>
         </div>
