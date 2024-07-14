@@ -22,7 +22,7 @@ if (isset($_POST['sum'])) {
     $type_id      = $_POST['type_id'];
     $quantity     = $_POST['quantity'];
     $product_id   = $_POST['product_id'];
-    
+
     $extend_price = ($type_price + $size_price) * $quantity;
     $base_price   = $item_price * $quantity;
     $total_price  = $base_price + $extend_price;
@@ -143,11 +143,11 @@ if (isset($_POST['sum'])) {
                     <hr class="border-1 border-neutral-300">
                     <div class="space-y-0 py-1 text-left">
                         <p class="text-sm font-medium text-neutral-600 py-2">
-                            <i class="fa fa-angle-right fa-xs fa-fw pr-4 text-blue-700 text-xs"></i>
-                            Isi Form dan Klik Hitung/Order untuk Melihat Detail Harga dan Memesan Item Langsung via WhatsApp
+                            <i class="fa fa-angle-right fa-xs fa-fw pr-4 text-blue-700 text-xs"></i>Ukuran dan Jenis Item Menentukan Harga
                         </p>
                         <p class="text-sm font-medium text-neutral-600 py-2">
-                            <i class="fa fa-angle-right fa-xs fa-fw pr-4 text-blue-700 text-xs"></i>Ukuran dan Tipe Item Menentukan Harga
+                            <i class="fa fa-angle-right fa-xs fa-fw pr-4 text-blue-700 text-xs"></i>
+                            Isi Form dan Klik Hitung/Order untuk Melihat Detail Harga dan Memesan Item Langsung via WhatsApp
                         </p>
                     </div>
                     <hr class="border-1 border-neutral-300">

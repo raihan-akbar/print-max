@@ -53,7 +53,6 @@
                         <img src="assets/img/system/hr-logo.png" alt="">
                     </div>
                 </div>
-                <!-- <h1 class="mb-4 text-3xl font-extrabold tracking-tight leading-none text-neutral-950 md:text-4xl lg:text-5xl"><span class="text-blue-500">MaX</span> Print</h1> -->
                 <p class="mb-8 text-lg font-normal text-gray-300 sm:px-16 lg:px-48">From mote pride open save men knew or, haply worse cablue waste a ancient dear.</p>
                 <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
                     <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
@@ -100,6 +99,37 @@
                         <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
                         <div class="mt-4 flex w-full text-center">
                             <a href="item.php?i=<?= $products['product_id']; ?>" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
+                                Rincian Produk
+                                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php
+            $a = "UZI";
+
+            for ($i=1; $i <= 30 ; $i++) {?>
+            <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
+                    <a href="#">
+                        <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
+                    </a>
+                    <div class="p-5">
+                        <a href="#">
+                            <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize">AYAYAY</h5>
+                            <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
+                            <p class="text-sm mt-4">Harga Mulai Dari</p>
+                            <p class="text-xl font-medium text-neutral-800">
+                                <span class="rp">250230</span>
+                                <span class="text-neutral-600 font-regular text-sm">IDR</span>
+                            </p>
+                        </a>
+                        <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
+                        <div class="mt-4 flex w-full text-center">
+                            <a href="item.php?i=1" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
                                 Rincian Produk
                                 <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
