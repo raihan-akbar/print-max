@@ -112,7 +112,7 @@
             <?php
             $a = "UZI";
 
-            for ($i=1; $i <= 30 ; $i++) {?>
+            for ($i=1; $i <= 10 ; $i++) {?>
             <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
                     <a href="#">
                         <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
