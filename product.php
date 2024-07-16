@@ -6,6 +6,14 @@ if (!isset($_SESSION['auth'])) {
     header("Location: signin.php?error=3");
 }
 
+// add item start
+
+if (isset($_POST['add-item'])) {
+    if (!isset($_POST['name'], $_POST['price'], $_POST['description'])) {
+        header("Location: item.php?error=0");
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +51,7 @@ if (!isset($_SESSION['auth'])) {
 
                     <div class="max-w-full h-full w-full sm:max-w-full md:max-w-sm lg:max-w-xs xl:max-w-xs bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
                         <div class="p-5 flex justify-center text-center items-center py-40">
-                            <a class="text-neutral-500 hover:text-neutral-800" data-modal-target="add-item-modal" data-modal-toggle="add-item-modal">
+                            <a class="text-neutral-500 hover:text-neutral-800" style="cursor: pointer;" data-modal-target="add-item-modal" data-modal-toggle="add-item-modal">
                                 <i class="fa fa-plus text-5xl"></i>
                                 <h5 class="mb-2 text-2xl font-semibold tracking-tight mt-4">Add Item</h5>
                             </a>
@@ -59,7 +67,7 @@ if (!isset($_SESSION['auth'])) {
                                 <!-- Modal header -->
                                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
                                     <h3 class="text-lg font-semibold text-neutral-900">
-                                        Create New Product
+                                        Add New Item
                                     </h3>
                                     <button type="button" class="text-neutral-400 bg-transparent hover:bg-neutral-200 hover:text-neutral-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="add-item-modal">
                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -69,28 +77,28 @@ if (!isset($_SESSION['auth'])) {
                                     </button>
                                 </div>
                                 <!-- Modal body -->
-                                <form class="p-4 md:p-5">
+                                <form class="p-4 md:p-5" method="post" action="product.php">
                                     <div class="grid gap-4 mb-4 grid-cols-2">
                                         <div class="col-span-2">
-                                            <label for="name" class="block mb-2 text-sm font-medium text-neutral-900">Name</label>
-                                            <input type="text" name="name" id="name" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-md rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type product name" required="">
+                                            <label for="name" class="block mb-2 text-sm font-medium text-neutral-900">Item</label>
+                                            <input type="text" name="name" id="name" class="bg-neutral-50 border border-neutral-300 text-neutral-900 text-md rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type item name" required="">
                                         </div>
                                         <div class="col-span-2 sm:col-span-1">
-                                            <label for="price" class="block mb-2 text-sm font-medium text-neutral-900">Price</label>
+                                            <label for="price" class="block mb-2 text-sm font-medium text-neutral-900">Item Price</label>
                                             <div class="flex">
                                                 <span class="inline-flex items-center px-3 text-sm font-medium text-neutral-900 bg-neutral-200 border border-s-0 border-neutral-300 rounded-s-md uppercase">
                                                     Rp.
                                                 </span>
-                                                <input type="text" min="0" name="price" id="quantity-input" data-input-counter data-input-counter-min="1" data-input-counter-max="9999999999" class="rounded-none rounded-e-lg bg-neutral-50 border border-neutral-300 text-neutral-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-md p-2.5 " placeholder="Jumlah Item">
+                                                <input type="text" min="0" name="price" id="quantity-input" data-input-counter data-input-counter-min="1" data-input-counter-max="9999999999" class="rounded-none rounded-e-lg bg-neutral-50 border border-neutral-300 text-neutral-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-md p-2.5 " placeholder="Price of 1 Item">
                                             </div>
                                         </div>
                                         <div class="col-span-2 sm:col-span-1">
-                                            <label for="category" class="block mb-2 text-sm font-medium text-neutral-900">Category</label>
+                                            <label for="thumbnail" class="block mb-2 text-sm font-medium text-neutral-900">Photo of Item</label>
                                             <input class="block w-full text-sm text-neutral-900 border border-neutral-300 rounded-lg cursor-pointer bg-neutral-50" id="file_input" type="file" accept="image/png, image/gif, image/jpeg">
                                         </div>
                                         <div class="col-span-2">
-                                            <label for="description" class="block mb-2 text-sm font-medium text-neutral-900">Product Description</label>
-                                            <textarea id="description" rows="4" class="block p-2.5 w-full text-md text-neutral-900 bg-neutral-50 rounded-lg border border-neutral-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write product description here"></textarea>
+                                            <label for="description" class="block mb-2 text-sm font-medium text-neutral-900">Item Description</label>
+                                            <textarea id="description" rows="4" class="block p-2.5 w-full text-md text-neutral-900 bg-neutral-50 rounded-lg border border-neutral-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write Item description here"></textarea>
                                         </div>
                                     </div>
                                     <div class="w-full">
@@ -101,7 +109,7 @@ if (!isset($_SESSION['auth'])) {
                                             </svg>
 
                                         </button>
-                                        <button type="submit" name="sum" class="inline-flex w-full justify-center items-center mt-4 text-md font-medium text-center text-neutral-500 hover:text-neutral-800" data-modal-toggle="add-item-modal">
+                                        <button type="submit" name="add-item" class="inline-flex w-full justify-center items-center mt-4 text-md font-medium text-center text-neutral-500 hover:text-neutral-800" data-modal-toggle="add-item-modal">
                                             Cancel
                                         </button>
                                     </div>
@@ -159,6 +167,8 @@ if (!isset($_SESSION['auth'])) {
             x[i].classList.add("currSign");
         }
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </body>
 
 </html>
