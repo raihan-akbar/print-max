@@ -10,7 +10,13 @@ if (!isset($_SESSION['auth'])) {
 
 if (isset($_POST['add-item'])) {
     if (!isset($_POST['name'], $_POST['price'], $_POST['description'])) {
-        header("Location: item.php?error=0");
+        header("Location: product.php?i=1");
+    }else if (isset($_POST['name'], $_POST['price'], $_POST['description'])) {
+        header()
+    }
+
+    else {
+        header("Location: product.php?i=2");
     }
 }
 
@@ -102,7 +108,7 @@ if (isset($_POST['add-item'])) {
                                         </div>
                                     </div>
                                     <div class="w-full">
-                                        <button type="submit" name="sum" class="inline-flex w-full justify-center items-center px-3 py-2 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                        <button type="submit" name="add-item" class="inline-flex w-full justify-center items-center px-3 py-2 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                                             Add New Item
                                             <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
@@ -156,6 +162,22 @@ if (isset($_POST['add-item'])) {
 
         </div>
     </div>
+
+    <!-- Alert -->
+    <?php
+    if (isset($_GET['i'])) {
+        if ($_GET['i'] == '1') {
+            echo "<script> window.onload=function(){
+                swal('Saved','New Item Successfully Saved', 'success')}</script>";
+        } else if ($_GET['i'] == '2') {
+            echo "<script> window.onload=function(){
+                    swal('Saving Failed','Please fill all Data Form', 'warning')}</script>";
+        } else {
+            echo "<script> window.onload=function(){
+                            swal('Error','Sorry Saving Failed Please Try Again', 'error')}</script>";
+        }
+    }
+    ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
