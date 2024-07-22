@@ -7,15 +7,37 @@ if (!isset($_SESSION['auth'])) {
 }
 
 // add item start
+include_once 'conn.php';
 
 if (isset($_POST['add-item'])) {
     if (!isset($_POST['name'], $_POST['price'], $_POST['description'])) {
-        header("Location: product.php?i=1");
-    }else if (isset($_POST['name'], $_POST['price'], $_POST['description'])) {
-        header()
-    }
+        header("Location: product.php?i=2");
+    } else if (isset($_POST['name'], $_POST['price'], $_POST['description'])) {
+        $name = $_POST['name'];
+        $price = $_POST['price'];
+        $description = $_POST['description'];
+        $thumbnails = $_FILES["thumbnails"]["name"];
+        if ($description == null) {
+            $description = $name;
+        }
+        if ($thumbnails == null) {
+            // $thumbnails = 'default.jpg';
+            $rename = 'default.jpg';
+        } else {
+            list($txt, $ext) = explode(".", $thumbnails);
+            $rename = round(microtime(true)*999).random_int(1000, 99999).".".$ext;
+            move_uploaded_file($_FILES["thumbnails"]["tmp_name"], "assets/img/item/" . $rename);
+        }
 
-    else {
+        $insert_query = "INSERT INTO `product` VALUES (NULL, '$name', '$rename', '$description', '$price')";
+
+        $execute = mysqli_query($con, $insert_query);
+        if ($execute) {
+            header("Location: product.php?i=1");
+        } else {
+            header("Location: product.php?i=0");
+        }
+    } else {
         header("Location: product.php?i=2");
     }
 }
@@ -83,7 +105,7 @@ if (isset($_POST['add-item'])) {
                                     </button>
                                 </div>
                                 <!-- Modal body -->
-                                <form class="p-4 md:p-5" method="post" action="product.php">
+                                <form class="p-4 md:p-5" method="post" action="product.php" enctype="multipart/form-data">
                                     <div class="grid gap-4 mb-4 grid-cols-2">
                                         <div class="col-span-2">
                                             <label for="name" class="block mb-2 text-sm font-medium text-neutral-900">Item</label>
@@ -100,11 +122,11 @@ if (isset($_POST['add-item'])) {
                                         </div>
                                         <div class="col-span-2 sm:col-span-1">
                                             <label for="thumbnail" class="block mb-2 text-sm font-medium text-neutral-900">Photo of Item</label>
-                                            <input class="block w-full text-sm text-neutral-900 border border-neutral-300 rounded-lg cursor-pointer bg-neutral-50" id="file_input" type="file" accept="image/png, image/gif, image/jpeg">
+                                            <input class="block w-full text-sm text-neutral-900 border border-neutral-300 rounded-lg cursor-pointer bg-neutral-50" id="file_input" name="thumbnails" type="file" accept="image/png, image/gif, image/jpeg">
                                         </div>
                                         <div class="col-span-2">
                                             <label for="description" class="block mb-2 text-sm font-medium text-neutral-900">Item Description</label>
-                                            <textarea id="description" rows="4" class="block p-2.5 w-full text-md text-neutral-900 bg-neutral-50 rounded-lg border border-neutral-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write Item description here"></textarea>
+                                            <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-md text-neutral-900 bg-neutral-50 rounded-lg border border-neutral-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write Item description here"></textarea>
                                         </div>
                                     </div>
                                     <div class="w-full">
@@ -115,7 +137,7 @@ if (isset($_POST['add-item'])) {
                                             </svg>
 
                                         </button>
-                                        <button type="submit" name="add-item" class="inline-flex w-full justify-center items-center mt-4 text-md font-medium text-center text-neutral-500 hover:text-neutral-800" data-modal-toggle="add-item-modal">
+                                        <button type="button" name="cancel" class="inline-flex w-full justify-center items-center mt-4 text-md font-medium text-center text-neutral-500 hover:text-neutral-800" data-modal-toggle="add-item-modal">
                                             Cancel
                                         </button>
                                     </div>
@@ -124,22 +146,25 @@ if (isset($_POST['add-item'])) {
                         </div>
                     </div>
 
-                    <?php
 
-                    for ($i = 1; $i <= 30; $i++) { ?>
+                    <?php
+                    include_once 'conn.php';
+                    $query = mysqli_query($con, "SELECT * FROM product");
+                    while ($products = mysqli_fetch_array($query)) {
+                    ?>
 
                         <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-xs xl:max-w-xs bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
                             <a href="#">
-                                <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=foo&font=bebas" alt="" />
+                                <img class="rounded-t-lg h-94" src="assets/img/item/<?= $products['product_thumbnail']; ?>" alt="" />
                             </a>
                             <div class="p-5">
                                 <a href="#">
-                                    <h5 class="mb-2 text-2xl font-medium tracking-tight text-neutral-800 capitalize"><code>Product Name</code></h5>
+                                    <h5 class="mb-2 text-2xl font-medium tracking-tight text-neutral-800 capitalize"><code><?= $products['product_name']; ?></code></h5>
                                     <!-- <p class="text-neutral-700 font-regular"><span class="text-sm"><code>Base Price</code> : </span> </p> -->
                                     <p class="text-sm mt-2"><code>Base Price :</code></p>
                                     <p class="text-xl font-medium text-neutral-800">
                                         <code>
-                                            <span class="rp">250230</span>
+                                            <span class="rp"><?= $products['product_price']; ?></span>
                                             <span class="text-neutral-600 font-regular text-sm">IDR</span>
                                         </code>
                                     </p>
