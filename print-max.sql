@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 11, 2024 at 01:36 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- Host: mysql
+-- Generation Time: Jul 22, 2024 at 01:45 PM
+-- Server version: 10.6.12-MariaDB-1:10.6.12+maria~ubu2004-log
+-- PHP Version: 8.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,9 @@ CREATE TABLE `menu` (
 
 INSERT INTO `menu` (`menu_id`, `menu_title`, `menu_url`, `menu_icon`, `menu_access`) VALUES
 (1, 'Dashboard', 'dashboard.php', 'fa-desktop', '1,2,3'),
-(2, 'Order', 'order.php', 'fa-shopping-basket', '2,3');
+(2, 'Order', 'order.php', 'fa-shopping-basket', '2,3'),
+(3, 'Product', 'product.php', 'fa-archive', '2,3'),
+(4, '', 'user.php', 'fa-users', '1');
 
 -- --------------------------------------------------------
 
@@ -62,7 +64,10 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_name`, `product_thumbnail`, `product_desc`, `product_price`) VALUES
-(1, 'Spanduk Vertical', 'default.png', 'Spanduk Vertical', 10000);
+(1, 'Raihan Akbar', 'default.png', 'a', 3),
+(2, 'Raihan Akbar', 'default.jpg', 'Raihan Akbar', 20000),
+(3, '2', '171991189626478619png', '2', 2),
+(4, '2', '17199119397922514.png', '2', 213);
 
 -- --------------------------------------------------------
 
@@ -199,13 +204,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `product_size`
