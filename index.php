@@ -109,12 +109,17 @@
                 </div>
             <?php } ?>
 
-
-
             <!-- End of Card Looping -->
-
         </div>
     </section>
+    <footer class="bg-white rounded-lg shadow">
+        <div class="w-full max-w-screen-xl mx-auto pt-2">
+            <p class="text-center text-neutral-600 text-sm">Ghina Nur Agsya</p>
+            <hr class="my-2 border-neutral-200 sm:mx-auto" />
+            <span class="block text-sm text-gray-500 sm:text-center pb-4">
+                © <?= date('Y') ?> <a href="https://foxlabs.id/" class="hover:underline">Fox Labs ID</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>

@@ -6,7 +6,7 @@ if (isset($_GET['i'])) {
 }else{
     header("Location: index.php");
 }
-$a = 0;
+$a = 1;
 
 if ($a == 1) {
     $modalHide  = 'overflow-hidden';
