@@ -21,14 +21,11 @@ if (isset($_POST['add-item'])) {
             $description = $name;
         }
         if ($thumbnails == null) {
-            // $thumbnails = 'default.jpg';
             $rename = 'default.jpg';
         } else {
             $allowed_ext = array("jpg", "png", "jpeg", "gif");
-            // $rename = round(microtime(true) * 9) . random_int(10, 99).$thumbnails;
             $ext = explode(".", $_FILES['thumbnails']['name']);
             $end = end($ext);
-            // $file_name=$_POST['filename'];
             $rename = random_int(100, 999).round(microtime(true) * 9).random_int(100, 999).".".$end;
             move_uploaded_file($_FILES["thumbnails"]["tmp_name"], "assets/img/item/" . $rename);
         }
