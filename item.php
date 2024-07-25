@@ -3,9 +3,15 @@ if (isset($_GET['i'])) {
     if ($_GET['i'] == null) {
         header("Location: index.php");
     }
-}else{
+     else {
+        include_once 'conn.php';
+        $product_id = $_GET['i'];
+        $query = mysqli_query($con, "SELECT * FROM product WHERE product_id='$product_id' ");
+    }
+} else {
     header("Location: index.php");
 }
+
 $a = 1;
 
 if ($a == 1) {
@@ -44,6 +50,7 @@ if (isset($_POST['sum'])) {
 
 </head>
 
+<?php while ($products = mysqli_fetch_array($query)) {?>
 <body class="bg-neutral-100 <?php echo $modalHide; ?>">
     <nav class="bg-blue-950 fixed top-0 z-40 start-0 w-full">
         <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-2">
@@ -61,7 +68,7 @@ if (isset($_POST['sum'])) {
             <div class="hidden w-full md:block md:w-auto rounded-lg py-2 bg-transparent" id="navbar-multi-level">
                 <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
                     <li>
-                        <a href="#home" class="block py-4 px-3 text-neutral-200 rounded md:p-0 hover:text-neutral-200 underline decoration-2 underline-offset-8">Beranda</a>
+                        <a href="index.php#home" class="block py-4 px-3 text-neutral-200 rounded md:p-0 hover:text-neutral-200 underline decoration-2 underline-offset-8">Beranda</a>
                     </li>
                     <li>
                         <a href="/index.php#catalogue" class="block py-4 px-3 text-neutral-400 rounded md:p-0 hover:text-neutral-200 hover:underline decoration-2 underline-offset-8">Katalog</a>
@@ -77,7 +84,7 @@ if (isset($_POST['sum'])) {
         </div>
     </nav>
 
-    <section id="item" class="w-full mb-24 my-16">
+    <section id="item" class="w-full mb-12 my-16">
         <div class="w-full text-center">
             <h3 class="text-2xl xs:text-xl lg:text-2xl font-semibold text-neutral-800">Order Item</h3>
             <hr class="w-16 h-1 mx-auto my-2 bg-blue-950 border-0 rounded ">
@@ -87,16 +94,18 @@ if (isset($_POST['sum'])) {
 
             <div class="min-w-screen max-w-full xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-6xl xl:max-w-6xl bg-white border border-neutral-200 rounded-lg shadow">
                 <a href="#">
-                    <img class="rounded-t-lg" src="http://fakeimg.pl/900x600?text=FOO&font=lobster" alt="" />
+                    <img class="rounded-t-lg" src="assets/img/item/<?= $products['product_thumbnail']; ?>" alt="" />
                 </a>
                 <div class="p-5">
-                    <h5 class="text-2xl font-bold tracking-tight text-neutral-900">Foo Item</h5>
+                    <h5 class="text-2xl font-bold tracking-tight text-neutral-900"><?= $products['product_name']; ?></h5>
                     <!-- <p class="font-semibold text-lg text-blue-800">Rp. <span class="rp">50000</span></p> -->
                     <?php
                     setlocale(LC_MONETARY, "ID");
-                    $rp = number_format(500000);
+                    $price = $products['product_price'];
+                    $rp = number_format($price);
                     ?>
                     <p class="font-semibold text-lg text-blue-800">Rp. <span class=""><?php echo $rp; ?></span></p>
+                    <p class="font-semibold text-lg text-neutral-600"><?= $products['product_desc']; ?></p>
                 </div>
             </div>
 
@@ -107,7 +116,7 @@ if (isset($_POST['sum'])) {
                     <hr class="border-1 border-blue-950">
                     <div>
                         <label for="nama" class="block mb-2 text-sm font-medium text-neutral-900">Nama Anda</label>
-                        <input type="text" name="nama" id="nama" class="bg-neutral-50 font-semibold border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@company.com" required />
+                        <input type="text" name="nama" id="nama" class="bg-neutral-50 font-semibold border border-neutral-300 text-neutral-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Nama Pemesan" required />
                     </div>
                     <div>
                         <label for="ukuran" class="block mb-2 text-sm font-medium text-neutral-900">Ukuran</label>
@@ -163,6 +172,9 @@ if (isset($_POST['sum'])) {
             </div>
         </div>
     </section>
+    <section class="text-center">
+        <a href="index.php#home">Kembali ke Beranda</a>
+    </section>
 
     <button data-modal-target="order-modal" data-modal-toggle="order-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hidden" type="button">
     </button>
@@ -189,19 +201,22 @@ if (isset($_POST['sum'])) {
                     <form class="space-y-4" action="#">
                         <div>
                             <p class="block text-sm font-medium text-neutral-900">Nama Pemesan</p>
-                            <p class="w-full text-neutral-900 text-lg font-semibold">Raihan Akbar</p>
+                            <p class="w-full text-neutral-900 text-lg font-semibold">Ghina Nur Agsya</p>
                         </div>
                         <div>
-                            <p class="block text-sm font-medium text-neutral-900">Nama Pemesan</p>
-                            <p class="w-full text-neutral-900 text-lg font-semibold">Raihan Akbar</p>
+                            <p class="block text-sm font-medium text-neutral-900">Item</p>
+                            <p class="w-full text-neutral-900 text-lg font-semibold">Sticker</p>
                         </div>
                         <div>
-                            <p class="block text-sm font-medium text-neutral-900">Nama Pemesan</p>
-                            <p class="w-full text-neutral-900 text-lg font-semibold">Raihan Akbar</p>
+                            <p class="block text-sm font-medium text-neutral-900">Jumlah</p>
+                            <p class="w-full text-neutral-900 text-lg font-semibold">3</p>
+                        </div>
+                        <div>
+                            <p class="block text-sm font-medium text-neutral-900">Total Harga</p>
+                            <p class="w-full text-neutral-900 text-lg font-semibold"><span class="rp">30000</span></p>
                         </div>
                         <hr>
-                        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Login to your account</button>
-                        <button class="w-full text-sm text-center font-medium text-neutral-400 hover:text-neutral-950">Tutup</button>
+                        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Pesan di Whatsapp</button>
                     </form>
                 </div>
             </div>
@@ -220,5 +235,5 @@ if (isset($_POST['sum'])) {
         }
     </script>
 </body>
-
+<?php } ?>
 </html>

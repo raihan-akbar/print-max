@@ -89,7 +89,7 @@ if (isset($_POST['add-item'])) {
 
                     <?php
                     include_once 'conn.php';
-                    $query = mysqli_query($con, "SELECT * FROM product");
+                    $query = mysqli_query($con, "SELECT * FROM product ORDER BY product_id DESC");
                     while ($products = mysqli_fetch_array($query)) {
                     ?>
 
