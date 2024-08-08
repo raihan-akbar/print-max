@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: mysql
--- Generation Time: Jul 22, 2024 at 01:45 PM
--- Server version: 10.6.12-MariaDB-1:10.6.12+maria~ubu2004-log
--- PHP Version: 8.2.1
+-- Host: 127.0.0.1
+-- Generation Time: Jul 25, 2024 at 03:36 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,7 +43,7 @@ INSERT INTO `menu` (`menu_id`, `menu_title`, `menu_url`, `menu_icon`, `menu_acce
 (1, 'Dashboard', 'dashboard.php', 'fa-desktop', '1,2,3'),
 (2, 'Order', 'order.php', 'fa-shopping-basket', '2,3'),
 (3, 'Product', 'product.php', 'fa-archive', '2,3'),
-(4, '', 'user.php', 'fa-users', '1');
+(4, 'User', 'user.php', 'fa-users', '1,2');
 
 -- --------------------------------------------------------
 
@@ -64,10 +64,15 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_name`, `product_thumbnail`, `product_desc`, `product_price`) VALUES
-(1, 'Raihan Akbar', 'default.png', 'a', 3),
-(2, 'Raihan Akbar', 'default.jpg', 'Raihan Akbar', 20000),
-(3, '2', '171991189626478619png', '2', 2),
-(4, '2', '17199119397922514.png', '2', 213);
+(1, 'Sticker', '30615494943547105.png', 'Sticker', 10000),
+(2, 'Banner', '79915494943711940.png', 'Banner', 50000),
+(3, 'Tote Bag', '26515494944076369.png', 'Tote Bag', 15000),
+(4, 'ID Card', '28415494944266407.png', 'ID Card', 8000),
+(5, 'Kartu Nama', '41315494950822787.png', 'Kartu Nama', 800),
+(6, 'Kalender', '54815494951062151.png', 'Kalender', 25000),
+(7, 'Poster', '19615494952069134.png', 'Poster', 10000),
+(8, 'Vertical Banner', '97715494952320568.png', 'Vertical Banner', 50000),
+(9, 'Lunch Box', '83715494952801368.png', 'Lunch Box', 4500);
 
 -- --------------------------------------------------------
 
@@ -82,14 +87,6 @@ CREATE TABLE `product_size` (
   `product_size_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `product_size`
---
-
-INSERT INTO `product_size` (`product_size_id`, `product_id`, `product_size_value`, `product_size_price`) VALUES
-(1, 1, '50x125cm', 5000),
-(2, 1, '80x225cm', 10000);
-
 -- --------------------------------------------------------
 
 --
@@ -102,13 +99,6 @@ CREATE TABLE `product_type` (
   `product_type_value` varchar(255) NOT NULL,
   `product_type_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `product_type`
---
-
-INSERT INTO `product_type` (`product_type_id`, `product_id`, `product_type_value`, `product_type_price`) VALUES
-(1, 1, 'Bahan Glosy', 0);
 
 -- --------------------------------------------------------
 
@@ -210,7 +200,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `product_size`
