@@ -6,13 +6,26 @@ if (isset($_GET['i'])) {
      else {
         include_once 'conn.php';
         $product_id = $_GET['i'];
-        $query = mysqli_query($con, "SELECT * FROM product WHERE product_id='$product_id' ");
+        $id_check = is_numeric($product_id);
+        
+        if ($id_check != 1) {
+            header("Location: index.php");
+
+        }else{
+            $query = mysqli_query($con, "SELECT * FROM product WHERE product_id='$product_id' ");
+            $item_check = mysqli_num_rows($query);
+            if ($item_check != 1) {
+                header("Location: index.php");
+            }
+        }
+        
     }
 } else {
     header("Location: index.php");
 }
 
-$a = 1;
+// Xample
+$a = 0;
 
 if ($a == 1) {
     $modalHide  = 'overflow-hidden';
@@ -27,12 +40,13 @@ if (isset($_POST['sum'])) {
     $size_id      = $_POST['size_id'];
     $type_id      = $_POST['type_id'];
     $quantity     = $_POST['quantity'];
-    $product_id   = $_POST['product_id'];
-
+    $product_id   = $_GET['i'];
+    
     $extend_price = ($type_price + $size_price) * $quantity;
     $base_price   = $item_price * $quantity;
     $total_price  = $base_price + $extend_price;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +55,7 @@ if (isset($_POST['sum'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Print Title</title>
+    <title>Print Title <?= $id_check?></title>
     <link rel="icon" href="assets/img/system/sq-logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
@@ -160,7 +174,6 @@ if (isset($_POST['sum'])) {
                         </p>
                     </div>
                     <hr class="border-1 border-neutral-300">
-
                     <button type="submit" name="sum" class="inline-flex w-full justify-center items-center px-3 py-2 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                         Hitung/Order
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -215,8 +228,12 @@ if (isset($_POST['sum'])) {
                             <p class="block text-sm font-medium text-neutral-900">Total Harga</p>
                             <p class="w-full text-neutral-900 text-lg font-semibold"><span class="rp">30000</span></p>
                         </div>
+                        <div>
+                            <hr>
+                            <p class="w-full text-neutral-700 text-sm font-regular pt-2">Silahkan Klik Link/Tombol Dibawah dan Lanjutkan percakapan via WhatsApp.</p>
+                        </div>
                         <hr>
-                        <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Pesan di Whatsapp</button>
+                        <a target="_blank" href="https://wa.me/628111221030?text=Pemesan%20%3A%20Ghina%20Nur%20Agsya%0AUkuran%20%3A%20Default%0AJenis%20%3A%20Glossy%0AJumlah%20%3A%20100" type="submit" class="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Pesan via Whatsapp</a>
                     </form>
                 </div>
             </div>

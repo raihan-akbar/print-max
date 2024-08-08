@@ -53,7 +53,6 @@
                         <img src="assets/img/system/hr-logo.png" alt="">
                     </div>
                 </div>
-                <p class="mb-8 text-lg font-normal text-gray-300 sm:px-16 lg:px-48">From mote pride open save men knew or, haply worse cablue waste a ancient dear.</p>
                 <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
                     <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
                         Kontak
