@@ -25,7 +25,7 @@ if (isset($_POST['add-item'])) {
             $rename = 'default.jpg';
         } else {
             list($txt, $ext) = explode(".", $thumbnails);
-            $rename = round(microtime(true)*999).random_int(1000, 99999).".".$ext;
+            $rename = round(microtime(true) * 999) . random_int(1000, 99999) . "." . $ext;
             move_uploaded_file($_FILES["thumbnails"]["tmp_name"], "assets/img/item/" . $rename);
         }
 
