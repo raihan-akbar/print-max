@@ -109,7 +109,7 @@ if (isset($_POST['add-item'])) {
                                 </a>
                                 <hr class="mt-8 bg-neutral-700 rounded border-1 border-neutral-700">
                                 <div class="mt-4 flex w-full text-center">
-                                    <a href="item.php?i=1" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
+                                    <a href="item_details.php?i=<?= $products['product_id']?>" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
                                         Customize
                                     </a>
                                 </div>
