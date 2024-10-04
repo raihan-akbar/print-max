@@ -141,7 +141,6 @@ if (isset($_POST['add-order'])) {
         header("Location: order.php");
     } else {
         header("Location: order.php?");
-
     }
 }
 
@@ -155,7 +154,6 @@ if (isset($_POST['done-order'])) {
         header("Location: order.php");
     } else {
         header("Location: order.php?");
-
     }
 }
 
@@ -169,7 +167,6 @@ if (isset($_POST['cancel-order'])) {
         header("Location: order.php");
     } else {
         header("Location: order.php?");
-
     }
 }
 
@@ -184,7 +181,6 @@ if (isset($_POST['progress-order'])) {
         header("Location: order.php");
     } else {
         header("Location: order.php?");
-
     }
 }
 
@@ -198,6 +194,44 @@ if (isset($_POST['pending-order'])) {
         header("Location: order.php");
     } else {
         header("Location: order.php?");
+    }
+}
 
+
+if (isset($_POST['add-user'])) {
+    if (!isset($_POST['role'])) {
+        header("Location: user.php?not_inserted");
+    } else {
+
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $role_id = $_POST['role'];
+
+        // encrypt user password using bcrypt
+        $options = [
+            'cost' => 12
+        ];
+        $encrypt = password_hash($password, PASSWORD_BCRYPT, $options);
+
+        $user_status = "Active";
+
+        $email_check = "SELECT * FROM user WHERE email='$email' ";
+        $result = mysqli_query($con, $email_check);
+        $email_row = mysqli_num_rows($result);
+
+        if ($email_row != 0) {
+            header("Location: user.php?");
+        } else {
+            $insert_query = "INSERT INTO `user` (`id`, `name`, `email`, `password`, `role_id`, `user_status`) VALUES (NULL, '$name', '$email', '$encrypt', '$role_id', 'Active');";
+
+            $execute = mysqli_query($con, $insert_query);
+            if ($execute) {
+                header("Location: user.php");
+            } else {
+                // echo 'No redirect means query failed';
+                header("Location: user.php?");
+            }
+        }
     }
 }

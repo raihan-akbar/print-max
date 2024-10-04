@@ -6,6 +6,12 @@ if (!isset($_SESSION['auth'])) {
    header("Location: signin.php?error=3");
 }
 
+$role_name = $_SESSION['role_name'];
+
+if($role_name == 'root'){
+   header("Location: user.php");
+}
+
 // add item start
 include_once 'conn.php';
 

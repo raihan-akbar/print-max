@@ -43,46 +43,46 @@
         </div>
     </nav>
 
-    <section id="home" class="my-14 h-screen">
-        <div class="bg-center bg-no-repeat bg-[url('https://images.unsplash.com/photo-1592312040834-bb0d621713e1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-neutral-500 bg-blend-multiply">
-            <div class="px-4 mx-auto max-w-screen-xl text-center py-4 lg:py-32">
-                <div class="grid justify-center place-items-center items-center">
-                    <div class="w-64 text-neutral-50 my-12">
-                        <img src="assets/img/system/hr-logo.png" alt="">
+    <section id="home" class="">
+        <div class="bg-neutral-50 h-screen">
+            <div class="px-4 mx-auto max-w-screen-xl text-center py-16 lg:py-28">
+                <h3 class="text-3xl font-bold pb-8 pt-4 text-blue-950">Kontak & Alamat</h3>
+                <div class="bg-blue-950 rounded-lg shadow-xl">
+                    <div class="w-full columns-1 md:columns-2 space-y-8 md:space-y-0">
+                        <div class="w-full rounded-lg">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15843.314325647201!2d106.9348136!3d-6.9110898!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68493f84c24701%3A0x9bbad8a95961ef87!2sPRINTMAX%20-%20Digital%20Printing%20Sukabumi!5e0!3m2!1sen!2sid!4v1725646948381!5m2!1sen!2sid" height="650" class="w-full rounded-t md:rounded-l max-h-96 lg:max-h-screen" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="w-full text-left space-y-4 p-4 justify-between w-full">
+                            <div class="py-2">
+                                <h3 class="font-bold text-neutral-50 text-3xl text-center">Detail</h3>
+                            </div>
+                            <div class="py-2">
+                                <h3 class="font-semibold text-neutral-50 text-2xl"><i class="fa-regular fa-map text-xl fa-xs"></i> Alamat</h3>
+                                <p class="font-medium text-neutral-200 text-lg">Jl. Surya Kencana No.101, Selabatu, Kec. Cikole, Kota Sukabumi, Jawa Barat 43111</p>
+                            </div>
+                            <div class="py-2">
+                                <h3 class="font-semibold text-neutral-50 text-2xl"><i class="fa-brands fa-whatsapp"></i> Whatsapp</h3>
+                                <p class="font-medium text-neutral-200 text-lg"><a target='_blank' href="https://wa.me/6283127201109">+6283127201109</a></p>
+                            </div>
+                            <div class="py-2">
+                                <h3 class="font-semibold text-neutral-50 text-2xl"><i class="fa-regular fa-envelope"></i> Email</h3>
+                                <p class="font-medium text-neutral-200 text-lg"><a>printmax.id@gmail.com</a></p>
+                            </div>
+                            <div class="py-2">
+                                <h3 class="font-semibold text-neutral-50 text-2xl"><i class="fa-brands fa-instagram"></i> Instagram</h3>
+                                <p class="font-medium text-neutral-200 text-lg"><a target='_blank' href="https://www.instagram.com/printmax.id/">@printmax.id</a></p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 mt-12 my-64">
-                    <div class="columns-1 lg:columns-3 gap-32">
-                        <div class="w-full pt-12 text-white">
-                            <p><i class="fa fa-phone text-3xl"></i></p>
-                            <h3 class="text-2xl font-semibold pt-2">08111221030</h3>
-                        </div>
-                        <div class="w-full pt-12 text-white">
-                            <p><i class="fa fa-map-pin text-3xl"></i></p>
-                            <h3 class="text-2xl font-semibold pt-2">Jl. Surya Kencana No.101, Kota Sukabumi</h3>
-                        </div>
-                        <div class="w-full pt-12 text-white">
-                            <p><i class="fa fa-camera text-3xl"></i></p>
-                            <h3 class="text-2xl font-semibold pt-2">@printmax.id</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full">
-                    <p class="text-white font-medium"><a href="index.php">Kembali ke Beranda</a></p>
                 </div>
             </div>
         </div>
     </section>
 
+    <section class="text-center pb-8">
+        <a href="index.php#home">Kembali ke Beranda</a>
+    </section>
 
-    <footer class="bg-white rounded-lg shadow">
-        <div class="w-full max-w-screen-xl mx-auto pt-2">
-            <p class="text-center text-neutral-600 text-sm">Ghina Nur Agsya</p>
-            <hr class="my-2 border-neutral-200 sm:mx-auto" />
-            <span class="block text-sm text-gray-500 sm:text-center pb-4">
-                © <?= date('Y') ?> <a href="https://foxlabs.id/" class="hover:underline">Fox Labs ID</a>. All Rights Reserved.</span>
-        </div>
-    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>

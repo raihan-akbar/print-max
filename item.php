@@ -146,7 +146,7 @@ if (isset($_POST['do_order'])) {
 
                 <div class="min-w-screen max-w-full xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-6xl xl:max-w-6xl bg-white border border-neutral-200 rounded-lg shadow">
                     <a href="#">
-                        <img class="rounded-t-lg" src="assets/img/item/<?= $products['product_thumbnail']; ?>" alt="" />
+                        <img class="rounded-t-lg sm:max-w-full lg:max-w-3xl" src="assets/img/item/<?= $products['product_thumbnail']; ?>" alt="" />
                     </a>
                     <div class="p-5">
                         <h5 class="text-2xl font-bold tracking-tight text-neutral-900"><?= $products['product_name']; ?></h5>
@@ -234,7 +234,7 @@ if (isset($_POST['do_order'])) {
                 </div>
             </div>
         </section>
-        <section class="text-center">
+        <section class="text-center pb-8">
             <a href="index.php#home">Kembali ke Beranda</a>
         </section>
 

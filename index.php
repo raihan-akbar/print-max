@@ -9,7 +9,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <link href="assets/css/custom.css" rel="stylesheet">
-
 </head>
 
 <body class="bg-neutral-100">
@@ -50,7 +49,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
-                    <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+                    <a href="contact.php" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
                         Kontak
                     </a>
                 </div>
@@ -66,27 +65,34 @@
         <div class="flex flex-wrap justify-center gap-6 px-4">
 
             <?php
-            include_once 'conn.php';
+            include_once "conn.php";
             $query = mysqli_query($con, "SELECT * FROM product");
-            while ($products = mysqli_fetch_array($query)) {
-            ?>
+            while ($products = mysqli_fetch_array($query)) { ?>
                 <div class="max-w-full sm:max-w-full md:max-w-sm lg:max-w-sm xl:max-w-sm bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl mb-10">
                     <a href="#">
-                        <img class="rounded-t-lg" src="assets/img/item/<?= $products['product_thumbnail']; ?>" alt="" />
+                        <img class="rounded-t-lg" src="assets/img/item/<?= $products[
+                            "product_thumbnail"
+                        ] ?>" alt="" />
                     </a>
                     <div class="p-5">
                         <a href="#">
-                            <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize"><?= $products['product_name']; ?></h5>
+                            <h5 class="mb-2 text-2xl font-semibold tracking-tight text-neutral-800 capitalize"><?= $products[
+                                "product_name"
+                            ] ?></h5>
                             <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Harga Mulai Dari </span> </p> -->
                             <p class="text-sm mt-4">Harga Mulai Dari</p>
                             <p class="text-xl font-medium text-neutral-800">
-                                <span class="rp"><?= $products['product_price']; ?></span>
+                                <span class="rp"><?= $products[
+                                    "product_price"
+                                ] ?></span>
                                 <span class="text-neutral-600 font-regular text-sm">IDR</span>
                             </p>
                         </a>
                         <hr class="mt-8 bg-blue-700 rounded border-1 border-blue-700">
                         <div class="mt-4 flex w-full text-center">
-                            <a href="item.php?i=<?= $products['product_id']; ?>" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
+                            <a href="item.php?i=<?= $products[
+                                "product_id"
+                            ] ?>" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
                                 Rincian Produk
                                 <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="m9 5 7 7-7 7" />
@@ -95,7 +101,8 @@
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            <?php }
+            ?>
 
             <!-- End of Card Looping -->
         </div>
@@ -105,7 +112,9 @@
             <p class="text-center text-neutral-600 text-sm">Ghina Nur Agsya</p>
             <hr class="my-2 border-neutral-200 sm:mx-auto" />
             <span class="block text-sm text-gray-500 sm:text-center pb-4">
-                © <?= date('Y') ?> <a href="https://foxlabs.id/" class="hover:underline">Fox Labs ID</a>. All Rights Reserved.</span>
+                © <?= date(
+                    "Y"
+                ) ?> <a href="https://foxlabs.id/" class="hover:underline">Fox Labs ID</a>. All Rights Reserved.</span>
         </div>
     </footer>
 
