@@ -72,74 +72,74 @@ include_once 'conn.php';
                     <hr class="w-full bg-blue-950 rounded mt-4">
                 </div>
 
-                <div class="w-full">
-                    <div class="mt-4">
-                        <div class="w-full p-4 bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl sm:p-8 space-y-4">
-                            <?php
-                            if ($user['user_status'] == 'Active') {
-                                $status_color = "green-700";
-                                $inverse_status_color = "red-700";
-                                $inverse_status = "Deactive";
+                <form action="details_helper.php" method="post">
+                    <div class="w-full">
+                        <div class="mt-4">
+                            <div class="w-full p-4 bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl sm:p-8 space-y-4">
+                                <?php
+                                if ($user['user_status'] == 'Active') {
+                                    $status_color = "green-700";
+                                    $inverse_status_color = "red-700";
+                                    $inverse_status = "Deactive";
+                                } else {
+                                    $status_color = "red-700";
+                                    $inverse_status_color = "green-700";
+                                    $inverse_status = "Active";
+                                }
+                                ?>
+                                <div class="w-full columns-2">
+                                    <div class="text-left">
+                                        <h3 class="font-semibold text-xl text-neutral-700"><?= $user['name'] ?> is <span class="text-<?= $status_color ?>"><?= $user['user_status'] ?></span></h3>
+                                    </div>
+                                    <div class="text-right">
+                                        <button class="font-semibold text-<?= $inverse_status_color ?>"><?= $inverse_status ?> User</button>
+                                    </div>
+                                </div>
+                                <div class="w-full columns-1 lg:columns-2 gap-8 space-y-4">
+                                    <div class="w-full">
+                                        <label for="name" class="text-neutral-700 p-1 font-medium">Name</label>
+                                        <input type="text" name="name" class="w-full rounded-lg bg-neutral-100 border-blue-950" placeholder="Insert Name" value="<?= $user['name'] ?>">
+                                    </div>
+                                    <div class="w-full">
+                                        <label for="email" class="text-neutral-700 p-1 font-medium">Email Address</label>
+                                        <input type="text" name="email" class="w-full rounded-lg bg-neutral-100 border-blue-950" placeholder="Insert Email Address" value="<?= $user['email'] ?>">
+                                    </div>
+                                </div>
+                                <div class="w-full columns-1 lg:columns-2 gap-8 space-y-4">
+                                    <div class="w-full">
+                                        <label for="role" class="text-neutral-700 p-1 font-medium">Role</label>
+                                        <select name="role" id="role" class="w-full rounded-lg bg-neutral-100 border-blue-950 p-2" required>
+                                            <!-- <option selected disabled>-- Select Role</option> -->
+                                            <option selected disabled value="<?= $user['role_id'] ?>"><?= $user['role_name'] ?></option>
+                                            <?php
+                                            include_once 'conn.php';
+                                            $query = mysqli_query($con, "SELECT * FROM role WHERE role_id!='1' ");
+                                            while ($role = mysqli_fetch_array($query)) { ?>
+                                                <option value="<?= $role['role_id'] ?>"><?= $role['role_name'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <div class="w-full">
+                                        <label for="status" class="text-neutral-700 p-1 font-medium">User Status</label>
+                                        <select name="status" id="status" class="w-full rounded-lg bg-neutral-100 border-blue-950 p-2" required>
+                                            <!-- <option selected disabled>-- Select Role</option> -->
+                                            <option selected disabled value="<?= $user['user_status'] ?>"><?= $user['user_status'] ?></option>
+                                            <option value="Active">Active</option>
+                                            <option value="Deactive">Deactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="w-full columns-1 gap-8 space-y-4">
+                                    <div class="w-full text-right">
+                                        <input name="uid" type="hidden" value="<?= $user['id'] ?>">
+                                        <button type="submit" name="update_user_profile" class="text-center w-full rounded-lg bg-blue-700 p-2 text-neutral-100 font-semibold hover:bg-blue-800 lg:w-fit">Save Edited <i class="fa-regular fa-floppy-disk"></i></button>
+                                    </div>
+                                </div>
 
-                            }else{
-                                $status_color = "red-700";
-                                $inverse_status_color = "green-700";
-                                $inverse_status = "Active";
-
-                            }
-                            ?>
-                            <div class="w-full columns-2">
-                                <div class="text-left">
-                                    <h3 class="font-semibold text-xl text-neutral-700"><?= $user['name'] ?> is <span class="text-<?=$status_color?>"><?= $user['user_status'] ?></span></h3>
-                                </div>
-                                <div class="text-right">
-                                    <button class="text-semibold text-<?= $inverse_status_color ?>"><?= $inverse_status ?> User</button>
-                                </div>
                             </div>
-                            <div class="w-full columns-1 lg:columns-2 gap-8 space-y-4">
-                                <div class="w-full">
-                                    <label for="name" class="text-neutral-700 p-1 font-medium">Name</label>
-                                    <input type="text" class="w-full rounded-lg bg-neutral-100 border-blue-950" placeholder="Insert Name" value="<?= $user['name'] ?>">
-                                </div>
-                                <div class="w-full">
-                                    <label for="name" class="text-neutral-700 p-1 font-medium">Email Address</label>
-                                    <input type="text" class="w-full rounded-lg bg-neutral-100 border-blue-950" placeholder="Insert Email Address" value="<?= $user['email'] ?>">
-                                </div>
-                            </div>
-                            <div class="w-full columns-1 lg:columns-2 gap-8 space-y-4">
-                                <div class="w-full">
-                                    <label for="name" class="text-neutral-700 p-1 font-medium">Role</label>
-                                    <select name="role" id="role" class="w-full rounded-lg bg-neutral-100 border-blue-950 p-2" required>
-                                        <!-- <option selected disabled>-- Select Role</option> -->
-                                        <option selected disabled value="<?= $user['role_id'] ?>"><?= $user['role_name'] ?></option>
-                                        <?php
-                                        include_once 'conn.php';
-                                        $query = mysqli_query($con, "SELECT * FROM role WHERE role_id!='1' ");
-                                        while ($role = mysqli_fetch_array($query)) { ?>
-                                            <option value="<?= $role['role_id'] ?>"><?= $role['role_name'] ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="w-full">
-                                    <label for="name" class="text-neutral-700 p-1 font-medium">User Status</label>
-                                    <select name="role" id="role" class="w-full rounded-lg bg-neutral-100 border-blue-950 p-2" required>
-                                        <!-- <option selected disabled>-- Select Role</option> -->
-                                        <option selected disabled value="<?= $user['user_status'] ?>"><?= $user['user_status'] ?></option>
-                                        <option value="Active">Active</option>
-                                        <option value="Deactive">Deactive</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="w-full columns-1 gap-8 space-y-4">
-                                <div class="w-full text-right">
-                                    <button class="text-center w-full rounded-lg bg-blue-700 p-2 text-neutral-100 font-semibold hover:bg-blue-800 lg:w-fit">Save Edited <i class="fa-regular fa-floppy-disk"></i></button>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-                </div>
-
+                </form>
 
 
                 <div class="w-full">

@@ -235,3 +235,22 @@ if (isset($_POST['add-user'])) {
         }
     }
 }
+
+if (isset($_POST['update_user_profile'])) {
+    $uid = $_POST['uid'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $role = $_POST['role'];
+    $status = $_POST['status'];
+
+    $update_query = "UPDATE `user` SET `name` = '$name', `email` = '$email',  `role_id` = '$role' WHERE `user`.`id` = $uid;";
+
+    $execute = mysqli_query($con, $update_query);
+    if ($execute) {
+        header("Location: user_details.php?i=" . $uid);
+    } else {
+        header("Location: user_details.php?i=" . $uid);
+    }
+} else {
+    header("Location: item_details.php?i=" . $uid);
+}
