@@ -243,6 +243,17 @@ if (isset($_POST['update_user_profile'])) {
     $role = $_POST['role'];
     $status = $_POST['status'];
 
+    $email_check = "SELECT * FROM user WHERE email='$email' ";
+    $result = mysqli_query($con, $email_check);
+    $email_row = mysqli_num_rows($result);
+
+    if ($email_row != 0) {
+        header("Location: user_details.php?i=" . $uid);
+    }
+else{
+
+    
+}
     $update_query = "UPDATE `user` SET `name` = '$name', `email` = '$email',  `role_id` = '$role' WHERE `user`.`id` = $uid;";
 
     $execute = mysqli_query($con, $update_query);

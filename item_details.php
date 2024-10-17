@@ -99,7 +99,7 @@ if (isset($_POST['add-type'])) {
                     <section id="item" class="w-full mb-12 my-8">
                         <div class="flex flex-wrap justify-center px-2 lg:px-16 xl:px-16 gap-8 mt-2 ">
 
-                            <div class="min-w-screen max-w-full xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-6xl xl:max-w-6xl bg-white border border-neutral-200 rounded-lg shadow">
+                            <div class="min-w-screen max-w-full xs:max-w-full sm:max-w-full md:max-w-full lg:max-w-2xl xl:max-w-2xl bg-white border border-neutral-200 rounded-lg shadow">
                                 <a href="#">
                                     <img class="rounded-t-lg" src="assets/img/item/<?= $products['product_thumbnail']; ?>" alt="" />
                                 </a>
