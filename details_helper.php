@@ -116,9 +116,9 @@ if (isset($_POST['delete-product'])) {
 
     if ($execute) {
         unlink("assets/img/item/" . $cur_thumb);
-        header("Location: product.php");
+        header("Location: product.php?");
     } else {
-        header("Location: product.php");
+        header("Location: product.php?id=");
     }
 }
 
@@ -249,11 +249,9 @@ if (isset($_POST['update_user_profile'])) {
 
     if ($email_row != 0) {
         header("Location: user_details.php?i=" . $uid);
+    } else {
+        header("Location: item_details.php?i=" . $uid);
     }
-else{
-
-    
-}
     $update_query = "UPDATE `user` SET `name` = '$name', `email` = '$email',  `role_id` = '$role' WHERE `user`.`id` = $uid;";
 
     $execute = mysqli_query($con, $update_query);

@@ -8,12 +8,13 @@ if (!isset($_SESSION['auth'])) {
 
 $role_name = $_SESSION['role_name'];
 
-if($role_name == 'root'){
+if ($role_name == 'root') {
    header("Location: user.php");
 }
 
 // add item start
 include_once 'conn.php';
+date_default_timezone_set('Asia/Jakarta');
 
 if (isset($_POST['add-item'])) {
    if (!isset($_POST['name'], $_POST['price'], $_POST['description'])) {
@@ -49,6 +50,32 @@ if (isset($_POST['add-item'])) {
    }
 }
 
+$year = date('Y');
+$month = date('m');
+
+// Order Status // 1 = Finished // 2 = Progress // 3 = Cancelled // 4 = Pending
+
+// Count Month All Order
+$order = "SELECT * FROM `book` WHERE MONTH(book_date) = '$month' AND YEAR(book_date) = '$year';";
+$order_query = mysqli_query($con, $order);
+$count_order = mysqli_num_rows($order_query);
+
+// Count Month Finished Order
+$finished = "SELECT * FROM `book` WHERE MONTH(book_date) = '$month' AND YEAR(book_date) = '$year' AND status='1';";
+$finished_query = mysqli_query($con, $finished);
+$count_finished = mysqli_num_rows($finished_query);
+
+// Count Month Canceled Order
+$cancelled = "SELECT * FROM `book` WHERE MONTH(book_date) = '$month' AND YEAR(book_date) = '$year' AND status='3';";
+$cancelled_query = mysqli_query($con, $cancelled);
+$count_cancelled = mysqli_num_rows($cancelled_query);
+
+// Count Month Progress Order
+$progress = "SELECT * FROM `book` WHERE MONTH(book_date) = '$month' AND YEAR(book_date) = '$year' AND status='2';";
+$progress_query = mysqli_query($con, $progress);
+$count_progress = mysqli_num_rows($progress_query)
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,18 +109,19 @@ if (isset($_POST['add-item'])) {
          </div>
 
          <div class="w-full mt-4">
+            <p class="pb-1 text-xs font-semibold text-right">* Insight Only for this <?= date('F') ?>.</p>
             <div class="columns-1 md:columns-2 lg:columns-4 gap-4">
                <div class="p-4 bg-purple-600 text-neutral-100 font-semibold text-lg rounded-lg mb-2 border-neutral-300 border shadow-xl">
-                  <p><i class="fa fa-cubes text-sm"></i> Today Orders : 4</p>
+                  <p><i class="fa fa-cubes text-sm"></i> Total Orders : <?= $count_order ?></p>
                </div>
                <div class="p-4 bg-green-600 text-neutral-100 font-semibold text-lg rounded-lg mb-2 border-neutral-300 border shadow-xl">
-                  <p><i class="fa fa-check text-sm"></i> Finished : 4</p>
+                  <p><i class="fa fa-check text-sm"></i> Finished : <?= $count_finished ?></p>
                </div>
                <div class="p-4 bg-yellow-600 text-neutral-100 font-semibold text-lg rounded-lg mb-2 border-neutral-300 border shadow-xl">
-                  <p><i class="fa fa-times text-sm"></i> Cancelled : 4</p>
+                  <p><i class="fa fa-times text-sm"></i> Cancelled : <?= $count_cancelled ?></p>
                </div>
                <div class="p-4 bg-blue-600 text-neutral-100 font-semibold text-lg rounded-lg mb-2 border-neutral-300 border shadow-xl">
-                  <p><i class="fa fa-gears text-sm"></i> On Progress : 4</p>
+                  <p><i class="fa fa-gears text-sm"></i> On Progress : <?= $count_progress ?></p>
                </div>
             </div>
          </div>
@@ -104,33 +132,36 @@ if (isset($_POST['add-item'])) {
                   <div class="w-full p-4 bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl sm:p-8">
                      <div class="flex items-center justify-between mb-4">
                         <h5 class="text-xl font-bold leading-none text-pink-600"><i class="fa fa-bullseye animate-pulse text-lg text-pink-600"></i> Pending Orders</h5>
-                        <p class="text-sm font-medium text-neutral-600 hover:underline">
-                           8
-                        </p>
+
                      </div>
                      <div class="flow-root">
                         <ul role="list" class="divide-y divide-neutral-200 h-screen max-h-96 overflow-y-scroll pr-4">
-                           <?php for ($i = 1; $i <= 8; $i++) { ?>
-                              <li class="py-3 sm:py-4">
-                                 <div class="flex items-center">
-                                    <div class="flex-1 min-w-0">
-                                       <p class="text-lg font-medium text-neutral-900 truncate">
-                                          Neil Sims - <?= $i ?>, August
-                                       </p>
-                                       <p class="text-md text-neutral-500 truncate">
-                                          <span>(8x)</span>
-                                          <span>Sticker</span>
-                                          <span>Vinyl</span>
-                                          <span>A4</span>
-                                          <span>A4</span>
-                                       </p>
+                           <?php
+                           include_once 'conn.php';
+                           $query = mysqli_query($con, "SELECT * FROM book WHERE status='4' ");
+                           while ($book = mysqli_fetch_array($query)) { ?>
+                              <form action="details_helper.php" method="post">
+                                 <li class="py-3 sm:py-4">
+                                    <div class="flex items-center">
+                                       <div class="flex-1 min-w-0">
+                                          <p class="text-lg font-bold text-neutral-900 truncate">
+                                             <?= $book['book_by'] ?>
+                                          </p>
+                                          <p class="text-md text-neutral-500 truncate">
+                                             <span>(<?= $book['qty'] ?>)</span>
+                                             <span><?= $book['product_name'] ?></span>
+                                             <span><?= $book['type'] ?></span>
+                                             <span><?= $book['size'] ?></span>
+                                          </p>
+                                       </div>
+                                       <div class="inline-flex items-center text-base font-semibold text-neutral-900 space-x-1">
+                                          <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>">
+                                          <button type="submit" name="cancel-order" class="p-1.5 text-sm bg-yellow-600 hover:bg-yellow-700 text-neutral-100 rounded-md">Cancel</button>
+                                          <button type="submit" name="progress-order" class="p-1.5 text-sm bg-blue-600 hover:bg-blue-700 text-neutral-100 rounded-md">Accept</button>
+                                       </div>
                                     </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-neutral-900 space-x-1">
-                                       <button class="p-1.5 text-sm bg-yellow-600 hover:bg-yellow-700 text-neutral-100 rounded-md">Cancel</button>
-                                       <button class="p-1.5 text-sm bg-blue-600 hover:bg-blue-700 text-neutral-100 rounded-md">Accept</button>
-                                    </div>
-                                 </div>
-                              </li>
+                                 </li>
+                              </form>
                            <?php } ?>
                         </ul>
                      </div>
@@ -140,31 +171,34 @@ if (isset($_POST['add-item'])) {
                   <div class="w-full p-4 bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl sm:p-8">
                      <div class="flex items-center justify-between mb-4">
                         <h5 class="text-xl font-bold leading-none text-blue-600"><i class="fa fa-clock animate-spin text-lg text-blue-600"></i> On-Progress Orders</h5>
-                        <p class="text-sm font-medium text-neutral-600 hover:underline">
-                           8
-                        </p>
+
                      </div>
                      <div class="flow-root">
                         <ul role="list" class="divide-y divide-neutral-200 h-screen max-h-96 overflow-y-scroll pr-4">
-                           <?php for ($i = 1; $i <= 8; $i++) { ?>
-                              <li class="py-3 sm:py-4">
-                                 <div class="flex items-center">
-                                    <div class="flex-1 min-w-0">
-                                       <p class="text-lg font-medium text-neutral-900 truncate">
-                                          Neil Sims - <?= $i ?>, August
-                                       </p>
-                                       <p class="text-md text-neutral-500 truncate">
-                                          <span>(8x)</span>
-                                          <span>Sticker</span>
-                                          <span>Vinyl</span>
-                                          <span>A4</span>
-                                          <span>A4</span>
-                                       </p>
+                           <?php
+                           include_once 'conn.php';
+                           $query = mysqli_query($con, "SELECT * FROM book WHERE status='2' ");
+                           while ($book = mysqli_fetch_array($query)) { ?>
+                              <form action="details_helper.php" method="post">
+                                 <li class="py-3 sm:py-4">
+                                    <div class="flex items-center">
+                                       <div class="flex-1 min-w-0">
+                                          <p class="text-lg font-bold text-neutral-900 truncate">
+                                             <?= $book['book_by'] ?>
+                                          </p>
+                                          <p class="text-md text-neutral-500 truncate">
+                                             <span>(<?= $book['qty'] ?>)</span>
+                                             <span><?= $book['product_name'] ?></span>
+                                             <span><?= $book['type'] ?></span>
+                                             <span><?= $book['size'] ?></span>
+                                          </p>
+                                       </div>
+                                       <div class="inline-flex items-center text-base font-semibold text-neutral-900 space-x-1">
+                                          <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>">
+                                          <button type="submit" name="done-order" class="p-1.5 text-sm bg-green-600 hover:bg-blue-700 text-neutral-100 rounded-md">Finish</button>
+                                       </div>
                                     </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-neutral-900 space-x-1">
-                                       <button class="p-1.5 text-sm bg-green-600 hover:bg-blue-700 text-neutral-100 rounded-md">Finish</button>
-                                    </div>
-                                 </div>
+                              </form>
                               </li>
                            <?php } ?>
                         </ul>

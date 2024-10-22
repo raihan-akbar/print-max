@@ -230,7 +230,7 @@ date_default_timezone_set('Asia/Jakarta');
                   <tbody>
                      <?php
                      include_once 'conn.php';
-                     $query = mysqli_query($con, "SELECT * FROM book ORDER BY book_id DESC LIMIT 50");
+                     $query = mysqli_query($con, "SELECT * FROM book ORDER BY book_id DESC");
                      while ($book = mysqli_fetch_array($query)) {
                         $status = $book['status'];
                         if ($status == '1') {
