@@ -8,7 +8,7 @@ if (!isset($_SESSION['auth'])) {
 
 $role_name = $_SESSION['role_name'];
 
-if ($role_name == 'root') {
+if ($role_name == 'staff') {
     session_destroy();
     header("Location: signin.php?error=3");
 }
@@ -141,9 +141,9 @@ include_once 'conn.php';
                     </div>
                 </form>
 
-
-                <div class="w-full">
-                    <div class="mt-4">
+                <form action="details_helper.php" method="post">
+                    <div class="w-full">
+                        <div class="mt-4">
                         <div class="w-full p-4 bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl sm:p-8 space-y-4">
                             <div class="w-full">
                                 <h3 class="font-semibold text-xl text-neutral-700">Change Password</h3>
@@ -166,7 +166,8 @@ include_once 'conn.php';
                             </div>
                         </div>
                     </div>
-
+                </form>                                    
+                    
                 </div>
                 <!-- Tables End -->
             </div>
