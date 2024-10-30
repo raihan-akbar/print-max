@@ -10,6 +10,7 @@ $role_name = $_SESSION['role_name'];
 
 if ($role_name == 'root') {
    header("Location: user.php");
+
 }
 
 // add item start

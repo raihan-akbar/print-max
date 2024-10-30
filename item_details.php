@@ -61,9 +61,6 @@ if (isset($_POST['add-type'])) {
         }
     }
 }
-// Type Add End
-
-
 
 ?>
 <!DOCTYPE html>
