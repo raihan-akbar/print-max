@@ -6,7 +6,7 @@ if (!isset($_SESSION['auth'])) {
     session_destroy();
     header("Location: signin.php?error=3");
 }
-f
+
 $role_name = $_SESSION['role_name'];
 
 if ($role_name != 'Admin') {
