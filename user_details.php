@@ -143,33 +143,34 @@ include_once 'conn.php';
                 <form action="details_helper.php" method="post">
                     <div class="w-full">
                         <div class="mt-4">
-                        <div class="w-full p-4 bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl sm:p-8 space-y-4">
-                            <div class="w-full">
-                                <h3 class="font-semibold text-xl text-neutral-700">Change Password</h3>
-                            </div>
-                            <div class="w-full columns-1 lg:columns-2 gap-8 space-y-4">
+                            <div class="w-full p-4 bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl sm:p-8 space-y-4">
                                 <div class="w-full">
-                                    <label for="password" class="text-neutral-700 p-1 font-medium">Insert New Password</label>
-                                    <input type="password" class="w-full rounded-lg bg-neutral-100 border-blue-950" placeholder="Insert Password" ">
+                                    <h3 class="font-semibold text-xl text-neutral-700">Change Password</h3>
+                                </div>
+                                <div class="w-full columns-1 lg:columns-2 gap-8 space-y-4">
+                                    <div class="w-full">
+                                        <label for="password" class="text-neutral-700 p-1 font-medium">Insert New Password</label>
+                                        <input name="new_password" type="password" class="w-full rounded-lg bg-neutral-100 border-blue-950" placeholder="Insert Password" ">
                                 </div>
                                 <div class=" w-full">
-                                    <label for="password-2" class="text-neutral-700 p-1 font-medium">Re-type New Password</label>
-                                    <input type="password" class="w-full rounded-lg bg-neutral-100 border-blue-950" placeholder="Insert Again Password" ">
+                                        <label for="password-2" class="text-neutral-700 p-1 font-medium">Re-type New Password</label>
+                                        <input name="re_new_password" type="password" class="w-full rounded-lg bg-neutral-100 border-blue-950" placeholder="Insert Again Password" ">
                                 </div>
                             </div>
                             <div class=" w-full columns-1 gap-8 space-y-4">
-                                    <div class="w-full text-right">
-                                        <button class="text-center w-full rounded-lg bg-blue-700 p-2 text-neutral-100 font-semibold hover:bg-blue-800 lg:w-fit">Save New Password <i class="fa-brands fa-keycdn text-lg"></i></button>
+                                        <div class="w-full text-right">
+                                            <input name="uid" type="hidden" value="<?= $user['id'] ?>">
+                                            <button type="submit" name="update_user_password" class="text-center w-full rounded-lg bg-blue-700 p-2 text-neutral-100 font-semibold hover:bg-blue-800 lg:w-fit">Save New Password <i class="fa-brands fa-keycdn text-lg"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>                                    
-                    
-                </div>
-                <!-- Tables End -->
+                </form>
+
             </div>
+            <!-- Tables End -->
+        </div>
         </div>
 
 

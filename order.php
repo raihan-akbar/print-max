@@ -9,40 +9,6 @@ if (!isset($_SESSION['auth'])) {
 // add item start
 include_once 'conn.php';
 
-if (isset($_POST['add-item'])) {
-   if (!isset($_POST['name'], $_POST['price'], $_POST['description'])) {
-      header("Location: product.php?i=2");
-   } else if (isset($_POST['name'], $_POST['price'], $_POST['description'])) {
-      $name = $_POST['name'];
-      $price = $_POST['price'];
-      $description = $_POST['description'];
-      $thumbnails = $_FILES["thumbnails"]["name"];
-      if ($description == null) {
-         $description = $name;
-      }
-      if ($thumbnails == null) {
-         $rename = 'default.jpg';
-      } else {
-         $allowed_ext = array("jpg", "png", "jpeg", "gif");
-         $ext = explode(".", $_FILES['thumbnails']['name']);
-         $end = end($ext);
-         $rename = random_int(100, 999) . round(microtime(true) * 9) . random_int(100, 999) . "." . $end;
-         move_uploaded_file($_FILES["thumbnails"]["tmp_name"], "assets/img/item/" . $rename);
-      }
-
-      $insert_query = "INSERT INTO `product` VALUES (NULL, '$name', '$rename', '$description', '$price')";
-
-      $execute = mysqli_query($con, $insert_query);
-      if ($execute) {
-         header("Location: product.php?i=1");
-      } else {
-         header("Location: product.php?i=0");
-      }
-   } else {
-      header("Location: product.php?i=2");
-   }
-}
-
 date_default_timezone_set('Asia/Jakarta');
 
 ?>

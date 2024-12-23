@@ -123,7 +123,6 @@ if (isset($_POST['delete-product'])) {
 }
 
 // Add Order
-
 if (isset($_POST['add-order'])) {
     $name = $_POST['name'];
     $product_name = $_POST['product_name'];
@@ -132,7 +131,6 @@ if (isset($_POST['add-order'])) {
     $qty = $_POST['qty'];
     $total = $_POST['total'];
     $book_date = $_POST['book_date'];
-    // $status = '2';
 
     $insert_query = "INSERT INTO `book` (`book_id`, `book_by`, `product_name`, `size`, `type`, `qty`, `total`, `status`, `book_date`) VALUES (NULL, '$name', '$product_name', '$size', '$type', '$qty', '$total', '2', '$book_date');";
 
@@ -254,7 +252,7 @@ if (isset($_POST['update_user_profile'])) {
     if ($email_row != 0) {
         header("Location: user_details.php?i=" . $uid);
     } else {
-        header("Location: item_details.php?i=" . $uid);
+        header("Location: user_details.php?i=" . $uid);
     }
     $update_query = "UPDATE `user` SET `name` = '$name', `email` = '$email',  `role_id` = '$role' WHERE `user`.`id` = $uid;";
 
@@ -266,4 +264,25 @@ if (isset($_POST['update_user_profile'])) {
     }
 } else {
     header("Location: item_details.php?i=" . $uid);
+}
+
+
+if (isset($_POST['update_user_password'])) {
+    $uid = $_POST['uid'];
+    $new_password = $_POST['new_password'];
+
+
+    if ($new_password == null) {
+        header("Location: user_details.php?i");
+    } else {
+        $options = ['cost' => 12];
+        $encrypt = password_hash($new_password, PASSWORD_BCRYPT, $options);
+        $update_query = "UPDATE `user` SET `password` = $encrypt WHERE `user`.`id` = $uid;";
+        $execute = mysqli_query($con, $update_query);
+        if ($execute) {
+            header("Location: user_details.php?i=" . $uid);
+        } else {
+            header("Location: user_details.php");
+        }
+    }
 }

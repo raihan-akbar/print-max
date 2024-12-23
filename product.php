@@ -26,7 +26,7 @@ if (isset($_POST['add-item'])) {
             $allowed_ext = array("jpg", "png", "jpeg", "gif");
             $ext = explode(".", $_FILES['thumbnails']['name']);
             $end = end($ext);
-            $rename = random_int(100, 999).round(microtime(true) * 9).random_int(100, 999).".".$end;
+            $rename = random_int(100, 999) . round(microtime(true) * 9) . random_int(100, 999) . "." . $end;
             move_uploaded_file($_FILES["thumbnails"]["tmp_name"], "assets/img/item/" . $rename);
         }
 
@@ -80,7 +80,7 @@ if (isset($_POST['add-item'])) {
 
                     <div class="max-w-full w-full sm:max-w-full md:max-w-sm lg:max-w-xs xl:max-w-xs mb-10 backdrop-blur-sm">
                         <div class="p-5 flex justify-center text-center items-center py-40 h-full rounded">
-                            <a class="text-neutral-500 hover:text-neutral-800" style="cursor: pointer;" data-modal-target="add-item-modal" data-modal-toggle="add-item-modal">
+                            <a class="text-neutral-500 hover:text-neutral-800" style="cursor: pointer;" data-modal-target="add-item-modal" data-modal-toggle="add-item-modal">  
                                 <i class="fa fa-arrow-down text-sm mb-2"></i>
                                 <h5 class="text-blue-700 hover:text-white border-2 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-md px-5 py-2 text-center shadow-2xl">Add New Item <i class="fa fa-plus text-md"></i></h5>
                             </a>
@@ -103,13 +103,13 @@ if (isset($_POST['add-item'])) {
                                     <!-- <p class="text-neutral-700 font-regular"><span class="text-sm">Base Price : </span> </p> -->
                                     <p class="text-sm mt-2">Base Price :</p>
                                     <p class="text-xl font-medium text-neutral-800">
-                                            <span class="rp"><?= $products['product_price']; ?></span>
-                                            <span class="text-neutral-600 font-regular text-sm">IDR</span>
+                                        <span class="rp"><?= $products['product_price']; ?></span>
+                                        <span class="text-neutral-600 font-regular text-sm">IDR</span>
                                     </p>
                                 </a>
                                 <hr class="mt-8 bg-neutral-700 rounded border-1 border-neutral-700">
                                 <div class="mt-4 flex w-full text-center">
-                                    <a href="item_details.php?i=<?= $products['product_id']?>" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
+                                    <a href="item_details.php?i=<?= $products['product_id'] ?>" class="inline-flex w-full justify-center items-center text-base font-medium text-center text-neutral-500 hover:text-blue-700 hover:animate-pulse">
                                         Customize
                                     </a>
                                 </div>
