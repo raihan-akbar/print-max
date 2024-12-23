@@ -77,7 +77,7 @@ $progress_query = mysqli_query($con, $progress);
 $count_progress = mysqli_num_rows($progress_query)
 
 
-?>
+   ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,7 +89,9 @@ $count_progress = mysqli_num_rows($progress_query)
    <script src="https://cdn.tailwindcss.com"></script>
    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
    <link href="assets/css/custom.css" rel="stylesheet">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -112,16 +114,20 @@ $count_progress = mysqli_num_rows($progress_query)
          <div class="w-full mt-4">
             <p class="pb-1 text-xs font-semibold text-right">* Insight Only for this <?= date('F') ?>.</p>
             <div class="columns-1 md:columns-2 lg:columns-4 gap-4">
-               <div class="p-4 bg-purple-600 text-neutral-100 font-semibold text-lg rounded-lg mb-2 border-neutral-300 border shadow-xl">
+               <div
+                  class="p-4 bg-purple-600 text-neutral-100 font-semibold text-lg rounded-lg mb-2 border-neutral-300 border shadow-xl">
                   <p><i class="fa fa-cubes text-sm"></i> Total Orders : <?= $count_order ?></p>
                </div>
-               <div class="p-4 bg-green-600 text-neutral-100 font-semibold text-lg rounded-lg mb-2 border-neutral-300 border shadow-xl">
+               <div
+                  class="p-4 bg-green-600 text-neutral-100 font-semibold text-lg rounded-lg mb-2 border-neutral-300 border shadow-xl">
                   <p><i class="fa fa-check text-sm"></i> Finished : <?= $count_finished ?></p>
                </div>
-               <div class="p-4 bg-yellow-600 text-neutral-100 font-semibold text-lg rounded-lg mb-2 border-neutral-300 border shadow-xl">
+               <div
+                  class="p-4 bg-yellow-600 text-neutral-100 font-semibold text-lg rounded-lg mb-2 border-neutral-300 border shadow-xl">
                   <p><i class="fa fa-times text-sm"></i> Cancelled : <?= $count_cancelled ?></p>
                </div>
-               <div class="p-4 bg-blue-600 text-neutral-100 font-semibold text-lg rounded-lg mb-2 border-neutral-300 border shadow-xl">
+               <div
+                  class="p-4 bg-blue-600 text-neutral-100 font-semibold text-lg rounded-lg mb-2 border-neutral-300 border shadow-xl">
                   <p><i class="fa fa-gears text-sm"></i> On Progress : <?= $count_progress ?></p>
                </div>
             </div>
@@ -132,7 +138,8 @@ $count_progress = mysqli_num_rows($progress_query)
                <div class="w-full lg:w-3/6 max-h-96 pr-0 lg:pr-2">
                   <div class="w-full p-4 bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl sm:p-8">
                      <div class="flex items-center justify-between mb-4">
-                        <h5 class="text-xl font-bold leading-none text-pink-600"><i class="fa fa-bullseye animate-pulse text-lg text-pink-600"></i> Pending Orders</h5>
+                        <h5 class="text-xl font-bold leading-none text-pink-600"><i
+                              class="fa fa-bullseye animate-pulse text-lg text-pink-600"></i> Pending Orders</h5>
 
                      </div>
                      <div class="flow-root">
@@ -155,10 +162,13 @@ $count_progress = mysqli_num_rows($progress_query)
                                              <span><?= $book['size'] ?></span>
                                           </p>
                                        </div>
-                                       <div class="inline-flex items-center text-base font-semibold text-neutral-900 space-x-1">
+                                       <div
+                                          class="inline-flex items-center text-base font-semibold text-neutral-900 space-x-1">
                                           <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>">
-                                          <button type="submit" name="cancel-order" class="p-1.5 text-sm bg-yellow-600 hover:bg-yellow-700 text-neutral-100 rounded-md">Cancel</button>
-                                          <button type="submit" name="progress-order" class="p-1.5 text-sm bg-blue-600 hover:bg-blue-700 text-neutral-100 rounded-md">Accept</button>
+                                          <button type="submit" name="cancel-order"
+                                             class="p-1.5 text-sm bg-yellow-600 hover:bg-yellow-700 text-neutral-100 rounded-md">Cancel</button>
+                                          <button type="submit" name="progress-order"
+                                             class="p-1.5 text-sm bg-blue-600 hover:bg-blue-700 text-neutral-100 rounded-md">Accept</button>
                                        </div>
                                     </div>
                                  </li>
@@ -171,7 +181,8 @@ $count_progress = mysqli_num_rows($progress_query)
                <div class="w-full lg:w-3/6 max-h-96 pl-0 lg:pl-2 py-32 lg:py-0">
                   <div class="w-full p-4 bg-neutral-50 border border-neutral-300 rounded-lg shadow-xl sm:p-8">
                      <div class="flex items-center justify-between mb-4">
-                        <h5 class="text-xl font-bold leading-none text-blue-600"><i class="fa fa-clock animate-spin text-lg text-blue-600"></i> On-Progress Orders</h5>
+                        <h5 class="text-xl font-bold leading-none text-blue-600"><i
+                              class="fa fa-clock animate-spin text-lg text-blue-600"></i> On-Progress Orders</h5>
 
                      </div>
                      <div class="flow-root">
@@ -194,9 +205,11 @@ $count_progress = mysqli_num_rows($progress_query)
                                              <span><?= $book['size'] ?></span>
                                           </p>
                                        </div>
-                                       <div class="inline-flex items-center text-base font-semibold text-neutral-900 space-x-1">
+                                       <div
+                                          class="inline-flex items-center text-base font-semibold text-neutral-900 space-x-1">
                                           <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>">
-                                          <button type="submit" name="done-order" class="p-1.5 text-sm bg-green-600 hover:bg-blue-700 text-neutral-100 rounded-md">Finish</button>
+                                          <button type="submit" name="done-order"
+                                             class="p-1.5 text-sm bg-green-600 hover:bg-blue-700 text-neutral-100 rounded-md">Finish</button>
                                        </div>
                                     </div>
                               </form>

@@ -30,7 +30,7 @@ if (isset($_POST['add-item'])) {
             move_uploaded_file($_FILES["thumbnails"]["tmp_name"], "assets/img/item/" . $rename);
         }
 
-        $insert_query = "INSERT INTO `product` VALUES (NULL, '$name', '$rename', '$description', '$price')";
+        $insert_query = "INSERT INTO `product` VALUES (NULL, '$name', '$rename', '$description', '$price', '0')";
 
         $execute = mysqli_query($con, $insert_query);
         if ($execute) {

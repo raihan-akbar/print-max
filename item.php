@@ -65,6 +65,8 @@ if (isset($_POST['do_order'])) {
     $qty = $_POST['qty'];
     $total = $_POST['total'];
     $book_date = $_POST['book_date'];
+    // $product_id = $_POST['product_id'];
+    // $user_id = $_POST['user_id'];
 
     setlocale(LC_MONETARY, "ID");
     $total_display = "Rp" . number_format($total);
